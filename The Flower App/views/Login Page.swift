@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Login_Page: View {
-    
+    //
     @State var isLoginActive: Bool = true
     @State var isRegisterActive: Bool = false
     @State var user: UserData

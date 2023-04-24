@@ -85,7 +85,6 @@
 				36B09F8729D74185006BAD74 /* views */,
 				3608EEB329CEE2EA007ED421 /* components */,
 				3608EE9F29CEDCEF007ED421 /* The_Flower_AppApp.swift */,
-				3608EEB129CEDD41007ED421 /* User.swift */,
 				3608EEB629CEEC10007ED421 /* GoogleService-Info.plist */,
 				3608EEA329CEDCF0007ED421 /* Assets.xcassets */,
 				3608EEA529CEDCF0007ED421 /* Preview Content */,
@@ -125,6 +124,7 @@
 		36B09F8A29D7476A006BAD74 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				3608EEB129CEDD41007ED421 /* User.swift */,
 				36B09F8B29D74775006BAD74 /* CameraModel.swift */,
 				3638D09029EEDE8B0010AC26 /* ViewController.swift */,
 				3638D09829F03EF10010AC26 /* FlowerModel.swift */,

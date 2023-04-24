@@ -11,7 +11,7 @@ struct MenuView: View {
     
     @ObservedObject var user: UserData
     @ObservedObject var view: ViewController
-    
+    //
     var body: some View {
         VStack{
             

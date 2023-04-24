@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
-
+//
 class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
     @Published var isTaken: Bool = false
     @Published var session = AVCaptureSession()

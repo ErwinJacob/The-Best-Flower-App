@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct CameraView: View {
-    
+    //
     @StateObject var camera: CameraModel = CameraModel()
     @ObservedObject var view: ViewController
     @State var user: UserData
