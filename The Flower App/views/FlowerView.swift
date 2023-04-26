@@ -9,26 +9,27 @@ import SwiftUI
 
 struct FlowerView: View {
     
-    //
-    @State var flower: Flower
+    @ObservedObject var flower: Flower
     
     var body: some View {
         GeometryReader{ proxy in
             
             VStack{
                 HStack{
-                    
+
                     Spacer()
-                    
+
                     Text("Flower: ")
                         .bold()
                         .font(.title)
-                    
+
                     Text(flower.name)
                         .font(.title2)
-                    
+
                     Spacer()
                 }
+
+                Spacer()
                 
                 HStack{
                     VStack{
@@ -53,37 +54,22 @@ struct FlowerView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: proxy.size.height*0.2)
-                    
+
                 }
                 .frame(height: proxy.size.height*0.2)
                 .padding(.vertical, proxy.size.width*0.05)
-                .padding(.top, proxy.size.height*0.05)
-                
+
                 Spacer()
                 
                 Text("Timeline")
                     .bold()
                     .font(.title)
-                ScrollView(.horizontal){
-                    HStack{
-                        ForEach(flower.data) { flowerData in
-                            VStack{
-                                Text(flowerData.date)
-//                                Text(flowerData.dataId)
-//                                Image(uiImage: flowerData.image)
+
+                FlowerTimeline(flower: flower)
+                    .frame(width: proxy.size.width*0.95, height: proxy.size.height*0.4)
+                    .padding(.horizontal, proxy.size.width*0.025)
+
                                 
-                                flowerData.image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: proxy.size.width*0.3)
-                            }
-                            .frame(width: proxy.size.width*0.35)
-                        }
-                    }
-                }
-                .padding(.horizontal, proxy.size.width*0.05)
-                
-                Spacer()
                 
             }
         }

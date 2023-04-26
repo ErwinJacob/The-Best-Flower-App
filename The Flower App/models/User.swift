@@ -20,10 +20,7 @@ class UserData: Identifiable, ObservableObject{
     
     @MainActor
     func addFlower(newFlower: Flower) async -> Bool{
-        
-//        let newFlowerId = UUID().uuidString
-//        let newFlower: Flower = Flower(imageBlob: convertImageToBase64String(img: UIImage(named: "test")!), info: "", flowerId: newFlowerId, userId: self.data!.uid, name: "", species: "", growth: "", health: "")
-        
+                
         do{
             let db = Firestore.firestore()
             
@@ -78,7 +75,7 @@ class UserData: Identifiable, ObservableObject{
     
     @MainActor
     func fetchData() async -> Bool{
-        if self.data == nil{ return false}
+        if self.data == nil{return false}
         else{
             do{
                 let db = Firestore.firestore()
@@ -111,11 +108,18 @@ class UserData: Identifiable, ObservableObject{
             self.isLogged = true
             
             await self.fetchData() //!!!!!!!!!!!!!!!!!!!!!!! TODO: test
-            
-//            print(convertImageToBase64String(img: UIImage(named: "test")!))
-            
-            
             return true
+
+            
+            
+//            if await self.fetchData(){ //!!!!!!!!!!!!!!!!!!!!!!! TODO: test
+//
+//                return true
+//            }
+//            else{
+//                self.errorMessage = "Error when trying to fetch data"
+//                return false
+//            }
         }
         catch{
             print("There was an issue when trying to sign in: \(error)")

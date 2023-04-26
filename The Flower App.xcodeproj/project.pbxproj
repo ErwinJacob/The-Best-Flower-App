@@ -18,6 +18,7 @@
 		3608EEBA29CEECCA007ED421 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3608EEB929CEECCA007ED421 /* FirebaseAuth */; };
 		3608EEBC29CEECCA007ED421 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3608EEBB29CEECCA007ED421 /* FirebaseFirestoreSwift */; };
 		3608EEBE29CEECCA007ED421 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3608EEBD29CEECCA007ED421 /* FirebaseStorage */; };
+		360CFB9E29F9C3F90064FC20 /* FlowerTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360CFB9D29F9C3F90064FC20 /* FlowerTimeline.swift */; };
 		3638D09129EEDE8B0010AC26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3638D09029EEDE8B0010AC26 /* ViewController.swift */; };
 		3638D09329EEEE1A0010AC26 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3638D09229EEEE1A0010AC26 /* MenuView.swift */; };
 		3638D09529F03DE10010AC26 /* FlowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3638D09429F03DE10010AC26 /* FlowersView.swift */; };
@@ -37,6 +38,7 @@
 		3608EEB129CEDD41007ED421 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3608EEB429CEE30B007ED421 /* LoginLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLabel.swift; sourceTree = "<group>"; };
 		3608EEB629CEEC10007ED421 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		360CFB9D29F9C3F90064FC20 /* FlowerTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowerTimeline.swift; sourceTree = "<group>"; };
 		3638D09029EEDE8B0010AC26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3638D09229EEEE1A0010AC26 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		3638D09429F03DE10010AC26 /* FlowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowersView.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				3608EEB429CEE30B007ED421 /* LoginLabel.swift */,
+				360CFB9D29F9C3F90064FC20 /* FlowerTimeline.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360CFB9E29F9C3F90064FC20 /* FlowerTimeline.swift in Sources */,
 				3608EEB229CEDD41007ED421 /* User.swift in Sources */,
 				3608EEA229CEDCEF007ED421 /* ContentView.swift in Sources */,
 				3608EEA029CEDCEF007ED421 /* The_Flower_AppApp.swift in Sources */,

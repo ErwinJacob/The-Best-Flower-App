@@ -38,8 +38,10 @@ struct FlowerTile: View {
 
 struct FlowersView: View {
     
-    //
     @ObservedObject var user: UserData
+    @State var showingEditAlert: Bool = false
+    @State private var editorFlowerName: String = ""
+    @State private var selectedFlower: Flower = Flower()
     
     var body: some View {
         GeometryReader{ proxy in
@@ -81,15 +83,52 @@ struct FlowersView: View {
                     
                     Spacer()
                     
-                    List(user.flowers) { flower in
-                        NavigationLink {
-                            FlowerView(flower: flower)
-                        } label: {
-                            FlowerTile(name: flower.name, species: "species", description: "description", photo: flower.image)
+                    List{
+                        ForEach(user.flowers, id: \.self) { flower in
+                            NavigationLink {
+                                FlowerView(flower: flower)
+                            } label: {
+                                FlowerTile(name: flower.name, species: "species", description: "description", photo: flower.image)
+                            }
+                            .swipeActions(allowsFullSwipe: true) {
+                                Button(role: .destructive, action: {
+                                    Task{
+                                        await user.delFlower(delFlower: flower)
+                                    }
+                                } ) {
+                                        Label("Delete", systemImage: "trash")
+                                }
+                                Button (action: {
+                                    editorFlowerName = flower.name
+                                    selectedFlower = flower
+                                    showingEditAlert.toggle()
+                                }) {
+                                  Label("Modify", systemImage: "pencil")
+                                }
+                                .tint(Color(UIColor.systemBlue))
+                            }
                         }
                     }
+                    .refreshable {
+                        await user.fetchData()
+                    }
+                    .alert("Enter new flower name", isPresented: $showingEditAlert) {
+                        TextField("Enter your name", text: $editorFlowerName)
+                        Button("OK", action: {
+                            selectedFlower.name = editorFlowerName
+                            Task{
+                                await user.modifyFlower(modFlower: selectedFlower)
+                            }
+                        }
+                        )
+                        Button("Cancel", role: .cancel, action: {})
+                    }
+
+                    
                 }
             }
         }
     }
+    
+    
 }
