@@ -22,18 +22,17 @@ class UserData: Identifiable, ObservableObject{
     func addFlower(newFlower: Flower) async -> Bool{
         
 //        let newFlowerId = UUID().uuidString
-//        let newFlower: Flower = Flower(imageBlob: convertImageToBase64String(img: UIImage(named: "test")!), informacje: "", flowerId: newFlowerId, userId: self.data!.uid, name: "", species: "", growth: "", health: "")
+//        let newFlower: Flower = Flower(imageBlob: convertImageToBase64String(img: UIImage(named: "test")!), info: "", flowerId: newFlowerId, userId: self.data!.uid, name: "", species: "", growth: "", health: "")
         
         do{
             let db = Firestore.firestore()
             
             try await db.collection("Users").document(self.data!.uid).collection("Flowers").document(newFlower.flowerId).setData([
                 "image": newFlower.getImageBlob(),
-                "informacje": newFlower.informacje,
+                "info": newFlower.info,
                 "name": newFlower.name,
                 "species": newFlower.species,
-                "growth": newFlower.growth,
-                "health": newFlower.health
+                "dominantColor": newFlower.dominantColor
             ])
             
             return true
@@ -64,11 +63,10 @@ class UserData: Identifiable, ObservableObject{
             
             try await db.collection("Users").document(self.data!.uid).collection("Flowers").document(modFlower.flowerId).setData([
                 "image": modFlower.getImageBlob(),
-                "informacje": modFlower.informacje,
+                "info": modFlower.info,
                 "name": modFlower.name,
                 "species": modFlower.species,
-                "growth": modFlower.growth,
-                "health": modFlower.health
+                "dominantColor": modFlower.dominantColor
             ])
             
             return true
@@ -87,12 +85,11 @@ class UserData: Identifiable, ObservableObject{
                 let snapshot = try await db.collection("Users").document(self.data!.uid).collection("Flowers").getDocuments()
                 self.flowers = snapshot.documents.map({ flower in
                     return Flower(imageBlob: flower["image"] as? String ?? "",
-                                  informacje: flower["informacje"] as? String ?? "info missing",
+                                  info: flower["info"] as? String ?? "info missing",
                                   flowerId: flower.documentID, userId: data!.uid,
                                   name: flower["name"] as? String ?? "name",
                                   species: flower["species"] as? String ?? "species",
-                                  growth: flower["growth"] as? String ?? "growth",
-                                  health: flower["health"] as? String ?? "health")
+                                  dominantColor: flower["dominantColor"] as? String ?? "dominantColor")
                 })
                 
                 return true

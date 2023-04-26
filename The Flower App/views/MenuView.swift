@@ -23,7 +23,7 @@ struct MenuView: View {
             } label: {
                 ZStack{
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 100, height: 40)
+                        .frame(width: 300, height: 40)
                         .foregroundColor(.green)
                     Text("Kamera")
                         .foregroundColor(.white)
@@ -35,7 +35,7 @@ struct MenuView: View {
             } label: {
                 ZStack{
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 100, height: 40)
+                        .frame(width: 300, height: 40)
                         .foregroundColor(.green)
                     Text("Flowers")
                         .foregroundColor(.white)
@@ -48,7 +48,7 @@ struct MenuView: View {
             } label: {
                 ZStack{
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 100, height: 40)
+                        .frame(width: 300, height: 40)
                         .foregroundColor(.green)
                     Text("Logout")
                         .foregroundColor(.white)

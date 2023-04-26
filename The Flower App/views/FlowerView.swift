@@ -40,18 +40,11 @@ struct FlowerView: View {
                             Text(flower.species)
                         }
                         HStack{
-                            Text("Wzrost: ")
+                            Text("Kolor dominujący: ")
                                 .bold()
                                 .font(.title3)
                             Spacer()
-                            Text(flower.growth)
-                        }
-                        HStack{
-                            Text("Stan: ")
-                                .bold()
-                                .font(.title3)
-                            Spacer()
-                            Text(flower.health)
+                            Text(flower.dominantColor)
                         }
                     }
                     .frame(width: proxy.size.width*0.5 , height: proxy.size.height*0.2)

@@ -18,19 +18,17 @@ class Flower: Identifiable, ObservableObject{
     @Published var image: UIImage
     @Published var name: String
     @Published var species: String
-    @Published var growth: String
-    @Published var health: String
-    @Published var informacje: String
+    @Published var info: String
+    @Published var dominantColor: String
     
-    init(imageBlob: String, informacje: String, flowerId: String, userId: String, name: String, species: String, growth: String, health: String){
+    init(imageBlob: String, info: String, flowerId: String, userId: String, name: String, species: String, dominantColor: String){
         
         self.image = convertBase64StringToImage(imageBase64String: imageBlob)
-        self.informacje = informacje
+        self.info = info
         self.flowerId = flowerId
         self.name = name
         self.species = species
-        self.growth = growth
-        self.health = health
+        self.dominantColor = dominantColor
         Task{
             await self.fetchFlowerData(userId: userId)
         }

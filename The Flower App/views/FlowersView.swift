@@ -7,6 +7,35 @@
 
 import SwiftUI
 
+struct FlowerTile: View {
+    var name: String
+    var species: String
+    var description: String
+    var photo: UIImage
+    
+    var body: some View {
+        HStack{
+            Image(uiImage: photo)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 100, height: 100)
+                .cornerRadius(10)
+                .padding(.trailing, 10)
+            VStack(alignment: .leading) {
+                Text(name)
+                    .font(.headline)
+                Text(species)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                Text(description)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .lineLimit(2)
+            }
+        }
+    }
+}
+
 struct FlowersView: View {
     
     //
@@ -34,9 +63,11 @@ struct FlowersView: View {
                         Button {
                             //add
                             let newFlowerId = UUID().uuidString
-                            let newFlower: Flower = Flower(imageBlob: convertImageToBase64String(img: UIImage(named: "test")!), informacje: "", flowerId: newFlowerId, userId: user.data!.uid, name: "", species: "", growth: "", health: "")
+                            let newFlower: Flower = Flower(imageBlob: convertImageToBase64String(img: UIImage(named: "test")!), info: "no info", flowerId: newFlowerId, userId: user.data!.uid, name: "no name", species: "no species", dominantColor: "#000000")
                             Task{
-                                await user.addFlower(newFlower: newFlower)
+                                if (await user.addFlower(newFlower: newFlower)) {
+                                    user.flowers.append(newFlower) // append the new flower to the user.flowers array
+                                }
                             }
                         } label: {
                             Image(systemName: "plus.circle.fill")
@@ -49,39 +80,14 @@ struct FlowersView: View {
                     }
                     
                     Spacer()
-                    ScrollView{
-                        ForEach(user.flowers) { flower in
-                            NavigationLink {
-                                FlowerView(flower: flower)
-                            } label: {
-                                HStack{
-                                    VStack(alignment: .center){
-                                        HStack{
-                                            Spacer()
-                                            Text(flower.name)
-                                                .bold()
-                                                .foregroundColor(Color(UIColor.label))
-                                                .font(.title2)
-                                            Spacer()
-                                        }
-//                                        Text(flower.informacje)
-                                        //dane - gatunek wzrost zdrowie kiedy ostatnio zrobione zdjecie kiedy ostatnio podlane
-                                        
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    Image(uiImage: flower.image)
-                                        .resizable()
-                                        .frame(width: proxy.size.height*0.2, height: proxy.size.height*0.2)
-                                    //Image(uiImage: img)
-                                }
-                            }
-                            .padding(.horizontal, proxy.size.width*0.05)
-                            
+                    
+                    List(user.flowers) { flower in
+                        NavigationLink {
+                            FlowerView(flower: flower)
+                        } label: {
+                            FlowerTile(name: flower.name, species: "species", description: "description", photo: flower.image)
                         }
                     }
-                    .padding(.vertical, proxy.size.width*0.05)
                 }
             }
         }
