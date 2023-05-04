@@ -101,7 +101,7 @@ struct Login_Page: View {
                                     Task{
                                         let isgood = await user.login()
                                         if isgood{
-                                            view.changeView(newView: Views.menuView)
+                                            view.changeView(newView: Views.flowersView)
                                         }
                                         else{
                                             showErrorAlert = true
@@ -113,7 +113,7 @@ struct Login_Page: View {
                                     Task{
                                         let isgood = await user.register(confirmPassword: passwordRepeat)
                                         if isgood{
-                                            view.changeView(newView: Views.menuView)
+                                            view.changeView(newView: Views.flowersView)
                                         }
                                         else{
                                             showErrorAlert = true
@@ -158,7 +158,7 @@ struct Login_Page: View {
                 if user.isLogged{
                     let isgood = await user.login()
                     if isgood{
-                        view.changeView(newView: Views.menuView)
+                        view.changeView(newView: Views.flowersView)
                     }
                 }
             }

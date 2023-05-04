@@ -64,8 +64,15 @@ struct FlowersView: View {
                         
                         Button {
                             //add
-                            let newFlowerId = UUID().uuidString
-                            let newFlower: Flower = Flower(imageBlob: convertImageToBase64String(img: UIImage(named: "test")!), info: "no info", flowerId: newFlowerId, userId: user.data!.uid, name: "no name", species: "no species", dominantColor: "#000000")
+                            let newFlowerId = UUID().uuidString // generate uuid
+                            
+                            let now = Date()
+                            let dtFormatter = DateFormatter()
+                            dtFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+                            let newEntryDate = dtFormatter.string(from: now) //get current date
+
+                            
+                            let newFlower: Flower = Flower(imageBlob: convertImageToBase64String(img: UIImage(named: "test")!), info: "no info", flowerId: newFlowerId, userId: user.data!.uid, name: "no name", species: "no species", dominantColor: "#000000", date: newEntryDate)
                             Task{
                                 if (await user.addFlower(newFlower: newFlower)) {
                                     user.flowers.append(newFlower) // append the new flower to the user.flowers array
@@ -84,7 +91,7 @@ struct FlowersView: View {
                     Spacer()
                     
                     List{
-                        ForEach(user.flowers, id: \.self) { flower in
+                        ForEach(Array(user.flowers.enumerated()), id: \.element) { index, flower in
                             NavigationLink {
                                 FlowerView(flower: flower)
                             } label: {
@@ -93,7 +100,9 @@ struct FlowersView: View {
                             .swipeActions(allowsFullSwipe: true) {
                                 Button(role: .destructive, action: {
                                     Task{
-                                        await user.delFlower(delFlower: flower)
+                                        if await user.delFlower(delFlower: flower){
+                                            user.flowers.remove(at: index)
+                                        }
                                     }
                                 } ) {
                                         Label("Delete", systemImage: "trash")

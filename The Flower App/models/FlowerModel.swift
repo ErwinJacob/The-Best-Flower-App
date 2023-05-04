@@ -23,6 +23,7 @@ class Flower: Identifiable, ObservableObject, Hashable{
     @Published var data: [FlowerData] = []
     @Published var flowerId: String
     @Published var userId: String
+    @Published var date: String
     
     //profilowe(?) dane
     @Published var image: UIImage
@@ -39,9 +40,10 @@ class Flower: Identifiable, ObservableObject, Hashable{
         self.species = ""
         self.info = ""
         self.dominantColor = ""
+        self.date = ""
     }
     
-    init(imageBlob: String, info: String, flowerId: String, userId: String, name: String, species: String, dominantColor: String){
+    init(imageBlob: String, info: String, flowerId: String, userId: String, name: String, species: String, dominantColor: String, date: String){
         
         self.userId = userId
         
@@ -51,7 +53,7 @@ class Flower: Identifiable, ObservableObject, Hashable{
         self.name = name
         self.species = species
         self.dominantColor = dominantColor
-        
+        self.date = date
         Task{
             await self.fetchFlowerData(userId: userId)
         }
@@ -67,7 +69,7 @@ class Flower: Identifiable, ObservableObject, Hashable{
             let db = Firestore.firestore()
             let snapshot = try await db.collection("Users").document(userId).collection("Flowers").document(flowerId).collection("Data").getDocuments()
             self.data = snapshot.documents.map({ d in
-                return FlowerData(imageBlob: d["image"] as? String ?? "", data: d["flowerData"] as? String ?? "", entryId: d.documentID, date: d["date"] as? String ?? "")
+                return FlowerData(imageBlob: d["image"] as? String ?? "", data: d["flowerData"] as? String ?? "", entryId: d.documentID, date: d["date"] as? String ?? "", flowerId: self.flowerId)
             })
             
             return true
@@ -123,8 +125,10 @@ class FlowerData: Identifiable, ObservableObject{
     @Published var data: String
     @Published var entryId: String
     @Published var date: String
+    @Published var flowerId: String
     
-    init(imageBlob: String, data: String, entryId: String, date: String){
+    
+    init(imageBlob: String, data: String, entryId: String, date: String, flowerId: String){
         if imageBlob != ""{
             self.image = convertBase64StringToImage(imageBase64String: imageBlob)
         }
@@ -134,6 +138,7 @@ class FlowerData: Identifiable, ObservableObject{
         self.data = data
         self.entryId = entryId
         self.date = date
+        self.flowerId = flowerId
     }
     
     func getImageBlob() -> String{

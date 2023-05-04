@@ -9,13 +9,15 @@ import SwiftUI
 import Firebase
 
 struct CameraView: View {
-    //
+    
+    
     @StateObject var camera: CameraModel = CameraModel()
-    @ObservedObject var view: ViewController
-    @State var user: UserData
-    @State var flowerId: String
-    @State var photoId: String = UUID().uuidString
-        
+//    @State var user: UserData
+    @ObservedObject var flower: Flower
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+    
     var body: some View {
         GeometryReader{ proxy in
             ZStack{
@@ -35,10 +37,29 @@ struct CameraView: View {
                             Button {
                                 //cyk fota
                                 if !camera.isSaved{
-                                    let cameraString = camera.savePic()
+                                    let cameraString = camera.savePic() //get image
+                                    let newEntryId = UUID().uuidString //generate uuid
                                     
-                                    let db = Firestore.firestore()
-                                    db.collection("Users").document(user.id.debugDescription).collection("Flowers").document(flowerId).collection("Data").document(photoId)
+                                    let now = Date()
+                                    let dtFormatter = DateFormatter()
+                                    dtFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+                                    let newEntryDate = dtFormatter.string(from: now) //get current date
+                                    
+                                    let newFlower = FlowerData(imageBlob: cameraString, data: "", entryId: newEntryId, date: newEntryDate, flowerId: flower.flowerId) //create new flowerData object
+                                    
+                                    Task{
+                                        if await flower.addFlowerData(newFlower){
+                                            flower.data.append(newFlower)
+                                            print("new FlowerData")
+                                            //back to previous view(flower view)
+                                            presentationMode.wrappedValue.dismiss()
+                                        }
+                                        else{
+                                            //error
+                                        }
+                                    }
+                                    
+
                                     
                                 }
                                 
@@ -83,7 +104,8 @@ struct CameraView: View {
                         HStack{
                             Spacer()
                             Button {
-                                view.changeView(newView: Views.menuView)
+//                                view.changeView(newView: Views.menuView)
+                                presentationMode.wrappedValue.dismiss()
                             } label: {
                                 ZStack{
                                     Circle()

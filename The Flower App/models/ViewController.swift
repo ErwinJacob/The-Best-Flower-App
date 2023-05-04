@@ -9,8 +9,8 @@ import Foundation
 //
 enum Views {
 case loginView
-case cameraView
-case menuView
+//case cameraView
+//case menuView
 case flowersView
 }
 

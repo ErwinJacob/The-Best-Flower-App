@@ -17,28 +17,7 @@ struct FlowerTimeline: View {
             ScrollView(.horizontal){
                 HStack(){
                     
-                    Button {
-                        let newEntryId = UUID().uuidString
-                        
-                        let now = Date()
-
-                        let dtFormatter = DateFormatter()
-                        dtFormatter.dateStyle = .short
-                        dtFormatter.timeStyle = .none
-
-                        let newEntryDate = dtFormatter.string(from: now)
-                        
-                        let newFlower = FlowerData(imageBlob: "", data: "", entryId: newEntryId, date: newEntryDate)
-                        
-                        Task{
-                            if await flower.addFlowerData(newFlower){
-                                flower.data.append(newFlower)
-                            }
-                            else{
-                                //error
-                            }
-                        }
-                    } label: {
+                    NavigationLink(destination: CameraView(flower: self.flower)) {
                         VStack{
                             ZStack{
                                 RoundedRectangle(cornerRadius: 10)

@@ -29,7 +29,8 @@ class UserData: Identifiable, ObservableObject{
                 "info": newFlower.info,
                 "name": newFlower.name,
                 "species": newFlower.species,
-                "dominantColor": newFlower.dominantColor
+                "dominantColor": newFlower.dominantColor,
+                "date": newFlower.date
             ])
             
             return true
@@ -45,6 +46,8 @@ class UserData: Identifiable, ObservableObject{
             let db = Firestore.firestore()
             
             try await db.collection("Users").document(self.data!.uid).collection("Flowers").document(delFlower.flowerId).delete()
+            
+            
             
             return true
         }
@@ -63,7 +66,8 @@ class UserData: Identifiable, ObservableObject{
                 "info": modFlower.info,
                 "name": modFlower.name,
                 "species": modFlower.species,
-                "dominantColor": modFlower.dominantColor
+                "dominantColor": modFlower.dominantColor,
+                "date": modFlower.date
             ])
             
             return true
@@ -86,7 +90,8 @@ class UserData: Identifiable, ObservableObject{
                                   flowerId: flower.documentID, userId: data!.uid,
                                   name: flower["name"] as? String ?? "name",
                                   species: flower["species"] as? String ?? "species",
-                                  dominantColor: flower["dominantColor"] as? String ?? "dominantColor")
+                                  dominantColor: flower["dominantColor"] as? String ?? "dominantColor",
+                                  date: flower["date"] as? String ?? "dominantColor")
                 })
                 
                 return true
