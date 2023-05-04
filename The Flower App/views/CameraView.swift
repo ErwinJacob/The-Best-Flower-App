@@ -103,19 +103,19 @@ struct CameraView: View {
                     VStack{
                         HStack{
                             Spacer()
-                            Button {
-//                                view.changeView(newView: Views.menuView)
-                                presentationMode.wrappedValue.dismiss()
-                            } label: {
-                                ZStack{
-                                    Circle()
-                                        .frame(width: 35, height: 35)
-                                        .foregroundColor(.green)
-                                    Text("<")
-                                        .foregroundColor(.white)
-                                }
-                            }
-                            .padding(.trailing, 20)
+//                            Button {
+////                                view.changeView(newView: Views.menuView)
+//                                presentationMode.wrappedValue.dismiss()
+//                            } label: {
+//                                ZStack{
+//                                    Circle()
+//                                        .frame(width: 35, height: 35)
+//                                        .foregroundColor(.green)
+//                                    Text("<")
+//                                        .foregroundColor(.white)
+//                                }
+//                            }
+//                            .padding(.trailing, 20)
                         }
                         
                         Spacer()

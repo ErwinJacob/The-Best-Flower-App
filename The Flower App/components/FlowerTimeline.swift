@@ -21,7 +21,7 @@ struct FlowerTimeline: View {
                         VStack{
                             ZStack{
                                 RoundedRectangle(cornerRadius: 10)
-                                    .foregroundColor(Color.black).opacity(0.05)
+                                    .foregroundColor(Color.primary).opacity(0.05)
                                 Image(systemName: "plus")
                                     .resizable()
                                     .scaledToFit()
@@ -31,16 +31,14 @@ struct FlowerTimeline: View {
                             .frame(width: proxy.size.width*0.4, height: proxy.size.height*0.8)
                             Text("Add photo")
                                 .font(.footnote)
-
                         }
-                        
                     }
                     
                     ForEach(flower.data) { flowerData in
                         VStack{
                             ZStack{
                                 RoundedRectangle(cornerRadius: 10)
-                                    .foregroundColor(Color.black).opacity(0.05)
+                                    .foregroundColor(Color.primary).opacity(0.05)
                                 Image(uiImage: flowerData.image)
                                     .resizable()
                                     .scaledToFit()
