@@ -43,7 +43,7 @@ struct FlowersView: View {
     @State private var editorFlowerName: String = ""
     @State private var selectedFlower: Flower = Flower()
     @ObservedObject var view: ViewController
-    
+    @State private var deleteConfirm: Bool = false
     var body: some View {
         GeometryReader{ proxy in
             NavigationView {
@@ -110,15 +110,13 @@ struct FlowersView: View {
                                 FlowerTile(name: flower.name, species: "species", description: "description", photo: flower.image)
                             }
                             .swipeActions(allowsFullSwipe: true) {
-                                Button(role: .destructive, action: {
-                                    Task{
-                                        if await user.delFlower(delFlower: flower){
-                                            user.flowers.remove(at: index)
-                                        }
-                                    }
+                                Button(role: .none, action: {
+                                    deleteConfirm = true
                                 } ) {
                                         Label("Delete", systemImage: "trash")
                                 }
+                                .tint(Color(UIColor.systemRed))
+
                                 Button (action: {
                                     editorFlowerName = flower.name
                                     selectedFlower = flower
@@ -128,6 +126,22 @@ struct FlowersView: View {
                                 }
                                 .tint(Color(UIColor.systemBlue))
                             }
+                            .confirmationDialog("Are you sure?",
+                              isPresented: $deleteConfirm) {
+                              Button("Delete this flower", role: .destructive) {
+                                  Task{
+                                      if await user.delFlower(delFlower: flower){
+                                          //TODO: usuniecie z tablicy
+                                          deleteConfirm = false
+                                          user.flowers.remove(at: index)
+                                      }
+                                      else{
+                                          //error
+                                          deleteConfirm = false
+                                      }
+                                  }
+                               }
+                             }
                         }
                     }
                     .refreshable {

@@ -10,7 +10,7 @@ import SwiftUI
 struct FlowerTimeline: View {
     
     @ObservedObject var flower: Flower
-    
+    @State private var deleteConfirm: Bool = false
     var body: some View {
         GeometryReader{ proxy in
             
@@ -34,7 +34,8 @@ struct FlowerTimeline: View {
                         }
                     }
                     
-                    ForEach(flower.data) { flowerData in
+//                    ForEach(flower.data) { flowerData in
+                    ForEach(Array(flower.data.enumerated()), id: \.element) { index, flowerData in
                         VStack{
                             ZStack{
                                 RoundedRectangle(cornerRadius: 10)
@@ -47,14 +48,7 @@ struct FlowerTimeline: View {
                                     HStack{
                                         Spacer()
                                         Button {
-                                            Task{
-                                                if await flower.delFlowerData(flowerDataToDelete: flowerData){
-                                                    //TODO: usuniecie z tablicy
-                                                }
-                                                else{
-                                                    //error
-                                                }
-                                            }
+                                            deleteConfirm = true
                                         } label: {
                                             Image(systemName: "trash.circle.fill")
                                                 .resizable()
@@ -64,7 +58,24 @@ struct FlowerTimeline: View {
                                                 .padding(.top, proxy.size.width*0.01)
                                                 .padding(.trailing, proxy.size.width*0.01)
                                         }
+                                        .confirmationDialog("Are you sure?",
+                                          isPresented: $deleteConfirm) {
+                                          Button("Delete this entry", role: .destructive) {
+                                              Task{
+                                                  if await flower.delFlowerData(flowerDataToDelete: flowerData){
+                                                      //TODO: usuniecie z tablicy
+                                                      deleteConfirm = false
+                                                      flower.data.remove(at: index)
+                                                  }
+                                                  else{
+                                                      //error
+                                                      deleteConfirm = false
+                                                  }
+                                              }
+                                           }
+                                         }
 
+                                        
                                     }
                                     Spacer()
                                 }
@@ -89,6 +100,7 @@ struct FlowerTimeline: View {
                 .padding(.bottom, proxy.size.height*0.05)
             }
             .frame(width: proxy.size.width, height: proxy.size.height)
+            
         }
     }
 }

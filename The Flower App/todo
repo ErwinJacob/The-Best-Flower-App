@@ -11,7 +11,6 @@ Klikajac przycisk robienia zdjecia tworzy sie nowy obiekt FlowerData zawierajacy
                                     dtFormatter.dateStyle = .short
                                     dtFormatter.timeStyle = .none
                                     let newEntryDate = dtFormatter.string(from: now) //aktualna date w formacie dd/mm/yyyy
-                                    
                                     let newFlower = FlowerData(imageBlob: cameraString, data: "", entryId: newEntryId, date: newEntryDate, flowerId: flower.flowerId) //create new flowerData object
 Następnie zdjecie zapisywane jest w bazie danych:
 Problemy: [FirebaseFirestore][I-FST000001] WriteStream (106347808) Stream error: 'Invalid argument: The value of property "image" is longer than 1048487 bytes.'

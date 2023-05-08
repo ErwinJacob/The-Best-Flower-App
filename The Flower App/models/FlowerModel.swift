@@ -118,7 +118,17 @@ class Flower: Identifiable, ObservableObject, Hashable{
     
 }
 
-class FlowerData: Identifiable, ObservableObject{
+class FlowerData: Identifiable, ObservableObject, Hashable{
+    
+    static func == (lhs: FlowerData, rhs: FlowerData) -> Bool {
+        if lhs.entryId == rhs.entryId {return true}
+        else{return false}
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.entryId)
+    }
+
     
     @Published var image: UIImage
     //jakies dane ktore wyciagniemy ze zdjecia

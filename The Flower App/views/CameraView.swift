@@ -10,10 +10,11 @@ import Firebase
 
 struct CameraView: View {
     
-    
     @StateObject var camera: CameraModel = CameraModel()
 //    @State var user: UserData
     @ObservedObject var flower: Flower
+    
+    @State private var isLoading: Bool = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
@@ -37,6 +38,7 @@ struct CameraView: View {
                             Button {
                                 //cyk fota
                                 if !camera.isSaved{
+                                    isLoading = true
                                     let cameraString = camera.savePic() //get image
                                     let newEntryId = UUID().uuidString //generate uuid
                                     
@@ -50,16 +52,17 @@ struct CameraView: View {
                                     Task{
                                         if await flower.addFlowerData(newFlower){
                                             flower.data.append(newFlower)
+                                            isLoading = false
                                             print("new FlowerData")
                                             //back to previous view(flower view)
                                             presentationMode.wrappedValue.dismiss()
                                         }
                                         else{
                                             //error
+                                            isLoading = false
                                         }
                                     }
                                     
-
                                     
                                 }
                                 
@@ -71,8 +74,15 @@ struct CameraView: View {
                                         .overlay {
                                             Capsule().stroke(.white, lineWidth: 3)
                                         }
-                                    Text(camera.isSaved ? "Zapisano" : "Zapisz zdjęcie")
-                                        .foregroundColor(.white)
+                                    if isLoading{
+                                        ProgressView()
+                                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                            .frame(width: proxy.size.width*0.1, height: proxy.size.width*0.1)
+                                    }
+                                    else{
+                                        Text(camera.isSaved ? "Zapisano" : "Zapisz zdjęcie")
+                                            .foregroundColor(.white)
+                                    }
                                 }
                             }
                             .padding(.horizontal, proxy.size.width*0.05)
