@@ -1,3 +1,5 @@
+TODO:
+
 
 - CameraView wywoluje sie po probie dodaniu FlowerData(newEntry)
 Klikajac przycisk robienia zdjecia tworzy sie nowy obiekt FlowerData zawierajacy:
@@ -24,6 +26,7 @@ TODO: ograniczyc wielkosc zdjecia przez zapisywaniem go w blobie -
 
 - Rezygnacja z MenuView
     TODO: przeniesc przycisk wylogowania
+    Zrobione
     
 - Timeline - sortowanie
     TODO: Dodać sortowanie, wedlug najswiezszego zdjecia - sortowanie wedlug wartosci "date" w FlowerModel
@@ -33,7 +36,7 @@ TODO: ograniczyc wielkosc zdjecia przez zapisywaniem go w blobie -
     
     
 - FlowersView - usuwanie kwiatka, po usunieciu kwiatka a nastepnie dodaniu nowego pojawiaja sie stare kwiatki
-    TODO: naprawic xd
+    TODO: naprawic
     Rozwiazano: dodano indexowanie elementow w ForEach, "destrukcja" elementu w liscie nie usuwala go z arraya, dodano usuwanie ;p
     
     

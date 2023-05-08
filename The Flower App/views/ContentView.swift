@@ -23,10 +23,10 @@ struct ContentView: View {
 //        case Views.menuView:
 //            MenuView(user: user, view: view)
         case Views.flowersView:
-            FlowersView(user: user)
+            FlowersView(user: user, view: view)
         default:
             VStack{
-                Text("Błąd view controllera")
+                Text("view controller error")
                     .bold()
             }
         }

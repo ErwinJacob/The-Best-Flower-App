@@ -42,16 +42,28 @@ struct FlowersView: View {
     @State var showingEditAlert: Bool = false
     @State private var editorFlowerName: String = ""
     @State private var selectedFlower: Flower = Flower()
+    @ObservedObject var view: ViewController
     
     var body: some View {
         GeometryReader{ proxy in
             NavigationView {
                 VStack{
                     HStack{
-                        VStack{
-                            
+                        Button{
+                            user.logout()
+                            view.changeView(newView: Views.loginView)
+                        } label: {
+                            ZStack{
+                                Circle()
+                                    .foregroundColor(.red)
+                                    .frame(width: proxy.size.width*0.075, height: proxy.size.width*0.075)
+                                Image(systemName: "rectangle.portrait.and.arrow.right")
+                                    .resizable()
+                                    .frame(width: proxy.size.width*0.045, height: proxy.size.width*0.045)
+                                    .foregroundColor(.white)
+                                    .padding(.leading, proxy.size.width*0.005)
+                            }
                         }
-                        .frame(width: proxy.size.width*0.075, height: proxy.size.width*0.075)
                         .padding(.leading, proxy.size.width*0.05)
                         
                         Spacer()
