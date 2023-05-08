@@ -166,6 +166,7 @@ struct CameraView: View {
         .onAppear(perform: {
             camera.checkPerm()
         })
+        .navigationBarBackButtonHidden(isLoading)
     }
         
 }

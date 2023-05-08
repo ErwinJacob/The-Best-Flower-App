@@ -48,6 +48,7 @@ struct FlowerTimeline: View {
                                     HStack{
                                         Spacer()
                                         Button {
+                                            print("button - trying to delete entry \(flowerData.date)")
                                             deleteConfirm = true
                                         } label: {
                                             Image(systemName: "trash.circle.fill")
@@ -60,16 +61,20 @@ struct FlowerTimeline: View {
                                         }
                                         .confirmationDialog("Are you sure?",
                                           isPresented: $deleteConfirm) {
-                                          Button("Delete this entry", role: .destructive) {
+                                          Button("Delete entry: \(flowerData.date)", role: .destructive) {
+                                              print("Confirmation dialog - trying to delete entry: \(flowerData.date)")
                                               Task{
                                                   if await flower.delFlowerData(flowerDataToDelete: flowerData){
                                                       //TODO: usuniecie z tablicy
+                                                      print(flowerData.date)
                                                       deleteConfirm = false
                                                       flower.data.remove(at: index)
+                                                      print("Entry delete action succesful")
                                                   }
                                                   else{
                                                       //error
                                                       deleteConfirm = false
+                                                      print("Error while trying to delete flower entry data")
                                                   }
                                               }
                                            }
@@ -85,16 +90,7 @@ struct FlowerTimeline: View {
                             Text(flowerData.date)
                                 .font(.footnote)
                         }
-//                        .onLongPressGesture {
-//                            Task{
-//                                if await flower.delFlowerData(flowerDataToDelete: flowerData){
-//                                    //TODO: usuniecie z tablicy
-//                                }
-//                                else{
-//                                    //error
-//                                }
-//                            }
-//                        }
+
                     }
                 }
                 .padding(.bottom, proxy.size.height*0.05)

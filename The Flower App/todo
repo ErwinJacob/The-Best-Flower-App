@@ -1,5 +1,20 @@
 TODO:
 
+- Timeline - sortowanie
+    TODO: Dodać sortowanie, wedlug najswiezszego zdjecia - sortowanie wedlug wartosci "date" w FlowerModel
+    
+- FlowersView - sortowanie
+    TODO: Dodać sortowanie, wedlug ostatnio dodanego kwiatka - dodac zmienna przechowujaca date utworzenia obiektu Flower
+    
+- FlowerTimeline - Błąd
+    Przy probie usunięcia usuwa się złe entry, najprawdopodobniej jest to spodowodowane tym ze "ConfirmationDialog" nie wie do ktorego indexu sie odniesc, wiec probouje do wszystkich i usuwa sie ten ktory wyswietli sie jako pierwszy.
+    TODO: Rozwiązać problem lub zrezygnowac z confirmation dialog i ewentualnie zastapic go czyms innym
+
+
+
+
+
+Done:
 
 - CameraView wywoluje sie po probie dodaniu FlowerData(newEntry)
 Klikajac przycisk robienia zdjecia tworzy sie nowy obiekt FlowerData zawierajacy:
@@ -26,14 +41,7 @@ TODO: ograniczyc wielkosc zdjecia przez zapisywaniem go w blobie -
 - Rezygnacja z MenuView
     TODO: przeniesc przycisk wylogowania
     Zrobione
-    
-- Timeline - sortowanie
-    TODO: Dodać sortowanie, wedlug najswiezszego zdjecia - sortowanie wedlug wartosci "date" w FlowerModel
-    
-- FlowersView - sortowanie
-    TODO: Dodać sortowanie, wedlug ostatnio dodanego kwiatka - dodac zmienna przechowujaca date utworzenia obiektu Flower
-    
-    
+        
 - FlowersView - usuwanie kwiatka, po usunieciu kwiatka a nastepnie dodaniu nowego pojawiaja sie stare kwiatki
     TODO: naprawic
     Rozwiazano: dodano indexowanie elementow w ForEach, "destrukcja" elementu w liscie nie usuwala go z arraya, dodano usuwanie ;p
