@@ -8,6 +8,7 @@ TODO:
     
 - FlowerTimeline - Błąd
     Przy probie usunięcia usuwa się złe entry, najprawdopodobniej jest to spodowodowane tym ze "ConfirmationDialog" nie wie do ktorego indexu sie odniesc, wiec probouje do wszystkich i usuwa sie ten ktory wyswietli sie jako pierwszy.
+    
     TODO: Rozwiązać problem lub zrezygnowac z confirmation dialog i ewentualnie zastapic go czyms innym
 
 

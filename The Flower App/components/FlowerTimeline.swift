@@ -11,6 +11,9 @@ struct FlowerTimeline: View {
     
     @ObservedObject var flower: Flower
     @State private var deleteConfirm: Bool = false
+    @State private var dataToDelete: FlowerData = FlowerData(imageBlob: "", data: "", entryId: "error", date: "", flowerId: "")
+    @State private var indexToDelete: Int?
+    
     var body: some View {
         GeometryReader{ proxy in
             
@@ -50,6 +53,9 @@ struct FlowerTimeline: View {
                                         Button {
                                             print("button - trying to delete entry \(flowerData.date)")
                                             deleteConfirm = true
+                                            dataToDelete = flowerData
+                                            indexToDelete = index
+                                            
                                         } label: {
                                             Image(systemName: "trash.circle.fill")
                                                 .resizable()
@@ -59,28 +65,6 @@ struct FlowerTimeline: View {
                                                 .padding(.top, proxy.size.width*0.01)
                                                 .padding(.trailing, proxy.size.width*0.01)
                                         }
-                                        .confirmationDialog("Are you sure?",
-                                          isPresented: $deleteConfirm) {
-                                          Button("Delete entry: \(flowerData.date)", role: .destructive) {
-                                              print("Confirmation dialog - trying to delete entry: \(flowerData.date)")
-                                              Task{
-                                                  if await flower.delFlowerData(flowerDataToDelete: flowerData){
-                                                      //TODO: usuniecie z tablicy
-                                                      print(flowerData.date)
-                                                      deleteConfirm = false
-                                                      flower.data.remove(at: index)
-                                                      print("Entry delete action succesful")
-                                                  }
-                                                  else{
-                                                      //error
-                                                      deleteConfirm = false
-                                                      print("Error while trying to delete flower entry data")
-                                                  }
-                                              }
-                                           }
-                                         }
-
-                                        
                                     }
                                     Spacer()
                                 }
@@ -96,7 +80,31 @@ struct FlowerTimeline: View {
                 .padding(.bottom, proxy.size.height*0.05)
             }
             .frame(width: proxy.size.width, height: proxy.size.height)
-            
+            .confirmationDialog("Are you sure?",
+              isPresented: $deleteConfirm) {
+              Button("Delete entry: \(dataToDelete.date)", role: .destructive) {
+                  if (indexToDelete != nil){
+                      Task{
+                          if await flower.delFlowerData(flowerDataToDelete: dataToDelete){
+                              //TODO: usuniecie z tablicy
+                              deleteConfirm = false
+                              flower.data.remove(at: indexToDelete!)
+                              print("Entry delete action succesful")
+                              indexToDelete = nil
+                              dataToDelete = FlowerData(imageBlob: "", data: "", entryId: "error", date: "", flowerId: "")
+                          }
+                          else{
+                              //error
+                              deleteConfirm = false
+                              print("Error while trying to delete flower entry data")
+                          }
+                      }
+                  }
+                  else{
+                      print("ERROR - found nil while trying to delete entry data")
+                  }
+               }
+             }
         }
     }
 }
