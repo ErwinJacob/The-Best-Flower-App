@@ -10,7 +10,11 @@ TODO:
     Przy probie usunięcia usuwa się złe entry, najprawdopodobniej jest to spodowodowane tym ze "ConfirmationDialog" nie wie do ktorego indexu sie odniesc, wiec probouje do wszystkich i usuwa sie ten ktory wyswietli sie jako pierwszy.
     
     TODO: Rozwiązać problem lub zrezygnowac z confirmation dialog i ewentualnie zastapic go czyms innym
-
+    Rozwiazanie: zamiast odwolywac sie do indexu i itemu z listy tworzymy zmienne
+        @State private var dataToDelete: FlowerData = FlowerData(imageBlob: "", data: "", entryId: "error", date: "", flowerId: "")
+        @State private var indexToDelete: Int?
+    na ktore pozniej wskazujemy w Confirm Dialogu
+    TODO: Sprawdzic czy przy FlowersView nie ma tego samego problemu przy usuwaniu
 
 
 
