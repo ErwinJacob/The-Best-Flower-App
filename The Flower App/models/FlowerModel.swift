@@ -63,6 +63,27 @@ class Flower: Identifiable, ObservableObject, Hashable{
         return convertImageToBase64String(img: self.image)
     }
     
+    @MainActor
+    func modifyFlower() async -> Bool{
+        do{
+            let db = Firestore.firestore()
+            
+            try await db.collection("Users").document(self.userId).collection("Flowers").document(self.flowerId).setData([
+                "image": self.getImageBlob(),
+                "info": self.info,
+                "name": self.name,
+                "species": self.species,
+                "dominantColor": self.dominantColor,
+                "date": self.date
+            ])
+            
+            return true
+        }
+        catch{
+            return false
+        }
+    }
+    
     func fetchFlowerData(userId: String) async -> Bool{
         
         do{

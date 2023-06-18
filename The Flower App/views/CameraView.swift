@@ -7,7 +7,7 @@ struct CameraView: View {
 
     @StateObject var camera: CameraModel = CameraModel()
     @ObservedObject var flower: Flower
-
+    
     @State private var isLoading: Bool = false
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -53,6 +53,12 @@ struct CameraView: View {
 
                                     let newHeight = Int(calcPlantSize())
                                     
+                                    if Int(self.flower.info) ?? 0<newHeight{
+                                        self.flower.info = String(newHeight)
+                                    }
+                                    if flower.species == "Not known"{
+                                        self.flower.species = detectPlantSpecies()
+                                    }
                                     
                                     let newFlower = FlowerData(imageBlob: cameraString, data: "", entryId: newEntryId, date: newEntryDate, flowerId: flower.flowerId, height: String(newHeight))
 
@@ -61,6 +67,7 @@ struct CameraView: View {
                                             flower.data.append(newFlower)
                                             isLoading = false
                                             print("New FlowerData")
+                                            await flower.modifyFlower()
                                             presentationMode.wrappedValue.dismiss()
                                         } else {
                                             isLoading = false
@@ -204,6 +211,20 @@ struct CameraView: View {
         }
     }
 
+    private func detectPlantSpecies() -> String{
+        
+        var species = "Not known"
+        detections.forEach { detection in
+            
+            if detection.labels[0].identifier == "monstera"{
+                species =  "Monstera Deliciosa"
+            }
+        }
+        
+        print("Species \(species)")
+        return species
+    }
+    
     private func calcPlantSize() -> Float{
         var plantSize: CGFloat = 0
         var markerSize: CGFloat = 0
