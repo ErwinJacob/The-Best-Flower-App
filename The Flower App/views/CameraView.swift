@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Firebase
+import CoreML
+import Vision
 
 struct CameraView: View {
     
@@ -18,6 +20,9 @@ struct CameraView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
+    //coreml
+    @State private var detections: [VNRecognizedObjectObservation] = []
+    @State private var image: UIImage?
     
     var body: some View {
         GeometryReader{ proxy in
@@ -36,10 +41,18 @@ struct CameraView: View {
 
                             
                             Button {
-                                //cyk fota
+                                //zapisz
                                 if !camera.isSaved{
                                     isLoading = true
-                                    let cameraString = camera.savePic() //get image
+                                    let cameraImg = camera.savePic() //get image
+                                    self.image = cameraImg
+                                    
+                                    
+//                                    coreml
+//                                    updateDetections(for: image!)
+                                    
+                                    let cameraString = convertImageToBase64String(img: cameraImg)
+
                                     let newEntryId = UUID().uuidString //generate uuid
                                     
                                     let now = Date()
@@ -107,25 +120,13 @@ struct CameraView: View {
                         }
                         
                     }
+                    .overlay(detectionOverlay(width: proxy.size.width, height: proxy.size.height))
                 }
             
             else{   
                     VStack{
                         HStack{
                             Spacer()
-//                            Button {
-////                                view.changeView(newView: Views.menuView)
-//                                presentationMode.wrappedValue.dismiss()
-//                            } label: {
-//                                ZStack{
-//                                    Circle()
-//                                        .frame(width: 35, height: 35)
-//                                        .foregroundColor(.green)
-//                                    Text("<")
-//                                        .foregroundColor(.white)
-//                                }
-//                            }
-//                            .padding(.trailing, 20)
                         }
                         
                         Spacer()
@@ -146,7 +147,11 @@ struct CameraView: View {
                         
                         Button {
                             //cyk fota
-                            camera.takePic()
+                            camera.takePic{ img in
+                                updateDetections(for: img)
+                            }
+                                
+                            
                         } label: {
                             ZStack{
                                 Circle()//.stroke(.white, lineWidth: 3)
@@ -159,6 +164,7 @@ struct CameraView: View {
                         }
                         
                         
+                        
                     }
                 }
             }
@@ -169,4 +175,101 @@ struct CameraView: View {
         .navigationBarBackButtonHidden(isLoading)
     }
         
+    private func calcPlantSize(){
+        
+        var plantSize: CGFloat = 0
+        var markerSize: CGFloat = 0
+        
+        detections.forEach { detection in
+            let identifier = detection.labels[0].identifier
+            if identifier == "marker"{
+                markerSize = detection.boundingBox.size.height
+            }
+            else if identifier == "monstera"{
+                plantSize = detection.boundingBox.size.height
+            }
+        }
+        
+        print(markerSize)
+        print(plantSize * 3.0/markerSize)
+    }
+    
+    private func updateDetections(for image: UIImage) {
+        
+        guard let ciImage = CIImage(image: image) else {
+            return
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let handler = VNImageRequestHandler(ciImage: ciImage, orientation: convertImageOrientation(image.imageOrientation))
+            do {
+                let model = try VNCoreMLModel(for: plant1040().model)
+                let request = VNCoreMLRequest(model: model, completionHandler: { request, error in
+                    self.processDetections(for: request, error: error)
+                })
+                request.imageCropAndScaleOption = .scaleFit
+                try handler.perform([request])
+            } catch {
+                print("Failed to perform detection.\n\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func processDetections(for request: VNRequest, error: Error?) {
+        DispatchQueue.main.async {
+            guard let results = request.results as? [VNRecognizedObjectObservation] else {
+                print("Unable to detect anything.\n\(error?.localizedDescription ?? "")")
+                return
+            }
+            
+            self.detections = results
+            
+            calcPlantSize()
+            print(detections.debugDescription)
+            print("\n")
+            
+            
+        }
+    }
+    
+    @ViewBuilder
+    private func detectionOverlay(width: CGFloat, height: CGFloat) -> some View {
+        ForEach(detections, id: \.self) { detection in
+            let boundingBox = detection.boundingBox
+            
+            let rect = CGRect(x: boundingBox.minX * width,
+                              y: (1 - boundingBox.minY) * height,
+                              width: boundingBox.width * width,
+                              height: boundingBox.height * height)
+            
+            Rectangle()
+                .stroke(Color.red, lineWidth: 2)
+                .frame(width: rect.width, height: rect.height)
+                .position(x: rect.midX + (width / 2), y: rect.midY + (height / 2))
+        }
+    }
+
+
+
+    
+    func getRandomColor() -> Color{
+        let red = Double.random(in: 0...1)
+        let green = Double.random(in: 0...1)
+        let blue = Double.random(in: 0...1)
+        return Color(red: red, green: green, blue: blue)
+    }
+    func convertImageOrientation(_ imageOrientation: UIImage.Orientation) -> CGImagePropertyOrientation {
+        switch imageOrientation {
+        case .up: return .up
+        case .down: return .down
+        case .left: return .left
+        case .right: return .right
+        case .upMirrored: return .upMirrored
+        case .downMirrored: return .downMirrored
+        case .leftMirrored: return .leftMirrored
+        case .rightMirrored: return .rightMirrored
+        @unknown default: return .up
+        }
+    }
+    
 }

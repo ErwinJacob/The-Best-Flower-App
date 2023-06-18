@@ -118,6 +118,13 @@ class Flower: Identifiable, ObservableObject, Hashable{
     
 }
 
+//struct ImageData{
+//    
+//    let label: String
+//    
+//    
+//}
+
 class FlowerData: Identifiable, ObservableObject, Hashable{
     
     static func == (lhs: FlowerData, rhs: FlowerData) -> Bool {
@@ -136,6 +143,8 @@ class FlowerData: Identifiable, ObservableObject, Hashable{
     @Published var entryId: String
     @Published var date: String
     @Published var flowerId: String
+    
+//    @Published var imageData: [ImageData] = [] //TODO: dodac do firebase
     
     
     init(imageBlob: String, data: String, entryId: String, date: String, flowerId: String){

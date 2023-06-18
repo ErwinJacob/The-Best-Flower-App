@@ -67,13 +67,15 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
             
     }
     
-    func takePic(){
+    func takePic(completion: @escaping (UIImage) -> Void){
         DispatchQueue.global(qos: .background).async{
             
             self.output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.session.stopRunning()
+//                return UIImage(data: self.picData)
+                completion(UIImage(data: self.picData)!)
             })
             
             DispatchQueue.main.async {
@@ -107,24 +109,25 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
         self.picData = imageData
     }
     
-    func savePic() -> String{
-        let image = UIImage(data: self.picData)!
+    func savePic() -> UIImage{
+        if let image = UIImage(data: self.picData){
 
-        if let compressedImageData = image.jpegData(compressionQuality: 0.1){
-            let compressedImage = UIImage(data: compressedImageData)
-            let stringImg = convertImageToBase64String(img: compressedImage!)
+            let compressedImageData = image.jpegData(compressionQuality: 0.1)
+            let compressedImage = UIImage(data: compressedImageData!)
+    //            let stringImg = convertImageToBase64String(img: compressedImage!)
 
-            //Saving image to iOS photo gallery
+                //Saving image to iOS photo gallery
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
 
             print("saved successfully")
             self.isSaved = true
 
-            return stringImg
+            return compressedImage!
         }
         else{
             //error
-            return errorBlob
+//            return errorBlob
+            return UIImage(systemName: "pencil")!
         }
     }
     
