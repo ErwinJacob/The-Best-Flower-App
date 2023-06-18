@@ -11,7 +11,7 @@ struct FlowerTimeline: View {
     
     @ObservedObject var flower: Flower
     @State private var deleteConfirm: Bool = false
-    @State private var dataToDelete: FlowerData = FlowerData(imageBlob: "", data: "", entryId: "error", date: "", flowerId: "")
+    @State private var dataToDelete: FlowerData = FlowerData(imageBlob: "", data: "", entryId: "error", date: "", flowerId: "", height: "0")
     @State private var indexToDelete: Int?
     
     var body: some View {
@@ -73,6 +73,8 @@ struct FlowerTimeline: View {
                             
                             Text(flowerData.date)
                                 .font(.footnote)
+                            Text("\(flowerData.height) cm")
+                                .font(.footnote)
                         }
 
                     }
@@ -91,7 +93,7 @@ struct FlowerTimeline: View {
                               flower.data.remove(at: indexToDelete!)
                               print("Entry delete action succesful")
                               indexToDelete = nil
-                              dataToDelete = FlowerData(imageBlob: "", data: "", entryId: "error", date: "", flowerId: "")
+                              dataToDelete = FlowerData(imageBlob: "", data: "", entryId: "error", date: "", flowerId: "", height: "")
                           }
                           else{
                               //error

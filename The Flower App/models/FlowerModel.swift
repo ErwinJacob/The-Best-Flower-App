@@ -69,7 +69,7 @@ class Flower: Identifiable, ObservableObject, Hashable{
             let db = Firestore.firestore()
             let snapshot = try await db.collection("Users").document(userId).collection("Flowers").document(flowerId).collection("Data").getDocuments()
             self.data = snapshot.documents.map({ d in
-                return FlowerData(imageBlob: d["image"] as? String ?? "", data: d["flowerData"] as? String ?? "", entryId: d.documentID, date: d["date"] as? String ?? "", flowerId: self.flowerId)
+                return FlowerData(imageBlob: d["image"] as? String ?? "", data: d["flowerData"] as? String ?? "", entryId: d.documentID, date: d["date"] as? String ?? "", flowerId: self.flowerId, height: d["height"] as? String ?? "0")
             })
             
             return true
@@ -88,7 +88,8 @@ class Flower: Identifiable, ObservableObject, Hashable{
             try await db.collection("Users").document(self.userId).collection("Flowers").document(self.flowerId).collection("Data").document(newFlowerData.entryId).setData([
                 "data": newFlowerData.data,
                 "date": newFlowerData.date,
-                "image": newFlowerData.getImageBlob()
+                "image": newFlowerData.getImageBlob(),
+                "height": String(newFlowerData.height)
             ])
             
 //            self.data.append(newFlowerData) //append done inside button to get view update
@@ -143,11 +144,12 @@ class FlowerData: Identifiable, ObservableObject, Hashable{
     @Published var entryId: String
     @Published var date: String
     @Published var flowerId: String
+    let height: Int
     
 //    @Published var imageData: [ImageData] = [] //TODO: dodac do firebase
     
     
-    init(imageBlob: String, data: String, entryId: String, date: String, flowerId: String){
+    init(imageBlob: String, data: String, entryId: String, date: String, flowerId: String, height: String){
         if imageBlob != ""{
             self.image = convertBase64StringToImage(imageBase64String: imageBlob)
         }
@@ -158,6 +160,7 @@ class FlowerData: Identifiable, ObservableObject, Hashable{
         self.entryId = entryId
         self.date = date
         self.flowerId = flowerId
+        self.height = Int(height) ?? 0
     }
     
     func getImageBlob() -> String{

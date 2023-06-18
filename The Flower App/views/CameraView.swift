@@ -1,114 +1,101 @@
-//
-//  CameraView.swift
-//  The Flower App
-//
-//  Created by Jakub Górka on 31/03/2023.
-//
-
 import SwiftUI
 import Firebase
 import CoreML
 import Vision
 
 struct CameraView: View {
-    
+
     @StateObject var camera: CameraModel = CameraModel()
-//    @State var user: UserData
     @ObservedObject var flower: Flower
-    
+
     @State private var isLoading: Bool = false
-    
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    //coreml
     @State private var detections: [VNRecognizedObjectObservation] = []
     @State private var image: UIImage?
-    
+
     var body: some View {
-        GeometryReader{ proxy in
-            ZStack{
+        GeometryReader { proxy in
+            ZStack {
                 CameraPreview(camera: camera)
                     .ignoresSafeArea(.all)
+                    .overlay {
+                        if camera.isTaken{
+                            detectionOverlay(proxy: proxy)
+                        }
+                    }
 
-            if camera.isTaken{
-                    VStack{
+                if camera.isTaken {
+                    VStack {
                         Spacer()
-                        HStack{
-                            
-                            ZStack{
-                            }
-                            .frame(width: proxy.size.width*0.15, height: proxy.size.width*0.15)
+                        HStack {
 
-                            
+                            ZStack {
+                                // Additional views or overlays
+                            }
+                            .frame(width: proxy.size.width * 0.15, height: proxy.size.width * 0.15)
+
                             Button {
-                                //zapisz
-                                if !camera.isSaved{
+                                // Save button action
+                                if !camera.isSaved {
                                     isLoading = true
-                                    let cameraImg = camera.savePic() //get image
+                                    let cameraImg = camera.savePic() // Get image
                                     self.image = cameraImg
-                                    
-                                    
-//                                    coreml
-//                                    updateDetections(for: image!)
-                                    
+
                                     let cameraString = convertImageToBase64String(img: cameraImg)
 
-                                    let newEntryId = UUID().uuidString //generate uuid
-                                    
+                                    let newEntryId = UUID().uuidString
                                     let now = Date()
                                     let dtFormatter = DateFormatter()
                                     dtFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-                                    let newEntryDate = dtFormatter.string(from: now) //get current date
+                                    let newEntryDate = dtFormatter.string(from: now)
+
+                                    let newHeight = Int(calcPlantSize())
                                     
-                                    let newFlower = FlowerData(imageBlob: cameraString, data: "", entryId: newEntryId, date: newEntryDate, flowerId: flower.flowerId) //create new flowerData object
                                     
-                                    Task{
-                                        if await flower.addFlowerData(newFlower){
+                                    let newFlower = FlowerData(imageBlob: cameraString, data: "", entryId: newEntryId, date: newEntryDate, flowerId: flower.flowerId, height: String(newHeight))
+
+                                    Task {
+                                        if await flower.addFlowerData(newFlower) {
                                             flower.data.append(newFlower)
                                             isLoading = false
-                                            print("new FlowerData")
-                                            //back to previous view(flower view)
+                                            print("New FlowerData")
                                             presentationMode.wrappedValue.dismiss()
-                                        }
-                                        else{
-                                            //error
+                                        } else {
                                             isLoading = false
+                                            // Handle error
                                         }
                                     }
-                                    
-                                    
                                 }
-                                
                             } label: {
-                                ZStack{
-                                    Capsule()//.stroke(.white, lineWidth: 3)
-                                        .frame(width: proxy.size.width*0.35, height: proxy.size.width*0.15)
+                                ZStack {
+                                    Capsule()
+                                        .frame(width: proxy.size.width * 0.35, height: proxy.size.width * 0.15)
                                         .foregroundColor(.white.opacity(0.25))
                                         .overlay {
                                             Capsule().stroke(.white, lineWidth: 3)
                                         }
-                                    if isLoading{
+                                    if isLoading {
                                         ProgressView()
                                             .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                            .frame(width: proxy.size.width*0.1, height: proxy.size.width*0.1)
-                                    }
-                                    else{
+                                            .frame(width: proxy.size.width * 0.1, height: proxy.size.width * 0.1)
+                                    } else {
                                         Text(camera.isSaved ? "Zapisano" : "Zapisz zdjęcie")
                                             .foregroundColor(.white)
                                     }
                                 }
                             }
-                            .padding(.horizontal, proxy.size.width*0.05)
-                            
-                            
-                            //retake
+                            .padding(.horizontal, proxy.size.width * 0.05)
+
+                            // Retake button
                             Button {
-                                //cyk fota
                                 camera.reTake()
+
                             } label: {
-                                ZStack{
-                                    Circle()//.stroke(.white, lineWidth: 3)
-                                        .frame(width: proxy.size.width*0.15, height: proxy.size.width*0.15)
+                                ZStack {
+                                    Circle()
+                                        .frame(width: proxy.size.width * 0.15, height: proxy.size.width * 0.15)
                                         .foregroundColor(.white.opacity(0.25))
                                         .overlay {
                                             Circle().stroke(.white, lineWidth: 3)
@@ -118,53 +105,45 @@ struct CameraView: View {
                                 }
                             }
                         }
-                        
                     }
-                    .overlay(detectionOverlay(width: proxy.size.width, height: proxy.size.height))
-                }
-            
-            else{   
-                    VStack{
-                        HStack{
+                } else {
+                    VStack {
+                        HStack {
                             Spacer()
                         }
-                        
+
                         Spacer()
-                        
-                        Text("Zrób zdjęcie tak, aby znacznik\n znajdował się w polu ponizej")
+
+                        Text("Zrób zdjęcie tak, aby znacznik\nznajdował się w polu poniżej")
                             .font(.title2)
                             .foregroundColor(.gray)
                             .bold()
-                        
+
                         Spacer()
-                        
-                        ZStack{}
-                            .frame(width: proxy.size.width*0.25, height: proxy.size.width*0.25)
-                            .overlay{
-                                Rectangle().stroke(.white, lineWidth: 2)
-                            }
-                            .padding(.bottom, 30)
-                        
+
+                        ZStack {
+                            // Additional views or overlays
+                        }
+                        .frame(width: proxy.size.width * 0.25, height: proxy.size.width * 0.25)
+                        .overlay {
+                            Rectangle().stroke(.white, lineWidth: 2)
+                        }
+                        .padding(.bottom, 30)
+
                         Button {
-                            //cyk fota
-                            camera.takePic{ img in
+                            camera.takePic { img in
                                 updateDetections(for: img)
                             }
-                                
-                            
                         } label: {
-                            ZStack{
-                                Circle()//.stroke(.white, lineWidth: 3)
-                                    .frame(width: proxy.size.width*0.15)
+                            ZStack {
+                                Circle()
+                                    .frame(width: proxy.size.width * 0.15)
                                     .foregroundColor(.white.opacity(0.25))
                                     .overlay {
                                         Circle().stroke(.white, lineWidth: 3)
                                     }
                             }
                         }
-                        
-                        
-                        
                     }
                 }
             }
@@ -174,36 +153,31 @@ struct CameraView: View {
         })
         .navigationBarBackButtonHidden(isLoading)
     }
-        
-    private func calcPlantSize(){
-        
-        var plantSize: CGFloat = 0
-        var markerSize: CGFloat = 0
-        
-        detections.forEach { detection in
-            let identifier = detection.labels[0].identifier
-            if identifier == "marker"{
-                markerSize = detection.boundingBox.size.height
-            }
-            else if identifier == "monstera"{
-                plantSize = detection.boundingBox.size.height
-            }
+
+    @ViewBuilder
+    private func detectionOverlay(proxy: GeometryProxy) -> some View {
+        ForEach(detections, id: \.self) { detection in
+            let boundingBox = detection.boundingBox
+
+            Rectangle()
+                .stroke(Color.red, lineWidth: 2)
+                .frame(width: boundingBox.width * proxy.size.width,
+                       height: boundingBox.height * proxy.size.height)
+                .position(x: boundingBox.midX * proxy.size.width,
+                          y: (1 - boundingBox.midY) * proxy.size.height)
         }
-        
-        print(markerSize)
-        print(plantSize * 3.0/markerSize)
     }
-    
+
+
     private func updateDetections(for image: UIImage) {
-        
         guard let ciImage = CIImage(image: image) else {
             return
         }
-        
+
         DispatchQueue.global(qos: .userInitiated).async {
             let handler = VNImageRequestHandler(ciImage: ciImage, orientation: convertImageOrientation(image.imageOrientation))
             do {
-                let model = try VNCoreMLModel(for: plant1040().model)
+                let model = try VNCoreMLModel(for: newPlantModel450().model)
                 let request = VNCoreMLRequest(model: model, completionHandler: { request, error in
                     self.processDetections(for: request, error: error)
                 })
@@ -214,51 +188,46 @@ struct CameraView: View {
             }
         }
     }
-    
+
     private func processDetections(for request: VNRequest, error: Error?) {
         DispatchQueue.main.async {
             guard let results = request.results as? [VNRecognizedObjectObservation] else {
                 print("Unable to detect anything.\n\(error?.localizedDescription ?? "")")
                 return
             }
-            
+
             self.detections = results
-            
-            calcPlantSize()
+
+//            calcPlantSize()
             print(detections.debugDescription)
             print("\n")
-            
-            
-        }
-    }
-    
-    @ViewBuilder
-    private func detectionOverlay(width: CGFloat, height: CGFloat) -> some View {
-        ForEach(detections, id: \.self) { detection in
-            let boundingBox = detection.boundingBox
-            
-            let rect = CGRect(x: boundingBox.minX * width,
-                              y: (1 - boundingBox.minY) * height,
-                              width: boundingBox.width * width,
-                              height: boundingBox.height * height)
-            
-            Rectangle()
-                .stroke(Color.red, lineWidth: 2)
-                .frame(width: rect.width, height: rect.height)
-                .position(x: rect.midX + (width / 2), y: rect.midY + (height / 2))
         }
     }
 
+    private func calcPlantSize() -> Float{
+        var plantSize: CGFloat = 0
+        var markerSize: CGFloat = 0
 
+        detections.forEach { detection in
+            let identifier = detection.labels[0].identifier
+            if identifier == "marker" {
+                markerSize = detection.boundingBox.size.height
+            } else if identifier == "monstera" {
+                plantSize = detection.boundingBox.size.height
+            }
+        }
 
-    
-    func getRandomColor() -> Color{
-        let red = Double.random(in: 0...1)
-        let green = Double.random(in: 0...1)
-        let blue = Double.random(in: 0...1)
-        return Color(red: red, green: green, blue: blue)
+        print(markerSize)
+
+        if plantSize.isNormal || markerSize.isNormal{
+            return Float(plantSize * 3.0 / markerSize)
+        }
+        else{
+            return 0.0
+        }
     }
-    func convertImageOrientation(_ imageOrientation: UIImage.Orientation) -> CGImagePropertyOrientation {
+
+    private func convertImageOrientation(_ imageOrientation: UIImage.Orientation) -> CGImagePropertyOrientation {
         switch imageOrientation {
         case .up: return .up
         case .down: return .down
@@ -271,5 +240,4 @@ struct CameraView: View {
         @unknown default: return .up
         }
     }
-    
 }

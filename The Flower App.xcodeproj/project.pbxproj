@@ -19,6 +19,7 @@
 		3608EEBC29CEECCA007ED421 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3608EEBB29CEECCA007ED421 /* FirebaseFirestoreSwift */; };
 		3608EEBE29CEECCA007ED421 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3608EEBD29CEECCA007ED421 /* FirebaseStorage */; };
 		360C8B8F2A3F2028007112C5 /* plant2110.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 360C8B8E2A3F2028007112C5 /* plant2110.mlmodel */; };
+		360C8B912A3F6214007112C5 /* newPlantModel450.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 360C8B902A3F6214007112C5 /* newPlantModel450.mlmodel */; };
 		360CFB9E29F9C3F90064FC20 /* FlowerTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360CFB9D29F9C3F90064FC20 /* FlowerTimeline.swift */; };
 		360CFBA02A04130A0064FC20 /* todo in Resources */ = {isa = PBXBuildFile; fileRef = 360CFB9F2A04130A0064FC20 /* todo */; };
 		362A71102A37B0B600C10CC9 /* MLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362A710F2A37B0B600C10CC9 /* MLModel.swift */; };
@@ -43,6 +44,7 @@
 		3608EEB429CEE30B007ED421 /* LoginLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLabel.swift; sourceTree = "<group>"; };
 		3608EEB629CEEC10007ED421 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		360C8B8E2A3F2028007112C5 /* plant2110.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = plant2110.mlmodel; sourceTree = "<group>"; };
+		360C8B902A3F6214007112C5 /* newPlantModel450.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = newPlantModel450.mlmodel; sourceTree = "<group>"; };
 		360CFB9D29F9C3F90064FC20 /* FlowerTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowerTimeline.swift; sourceTree = "<group>"; };
 		360CFB9F2A04130A0064FC20 /* todo */ = {isa = PBXFileReference; lastKnownFileType = text; path = todo; sourceTree = "<group>"; };
 		362A710F2A37B0B600C10CC9 /* MLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLModel.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				3608EEA329CEDCF0007ED421 /* Assets.xcassets */,
 				360C8B8E2A3F2028007112C5 /* plant2110.mlmodel */,
 				362A712F2A39C75C00C10CC9 /* plant1040.mlmodel */,
+				360C8B902A3F6214007112C5 /* newPlantModel450.mlmodel */,
 				3608EEA529CEDCF0007ED421 /* Preview Content */,
 			);
 			path = "The Flower App";
@@ -238,6 +241,7 @@
 				3608EEB529CEE30B007ED421 /* LoginLabel.swift in Sources */,
 				362A71102A37B0B600C10CC9 /* MLModel.swift in Sources */,
 				362A71302A39C75C00C10CC9 /* plant1040.mlmodel in Sources */,
+				360C8B912A3F6214007112C5 /* newPlantModel450.mlmodel in Sources */,
 				3608EEB029CEDD35007ED421 /* Login Page.swift in Sources */,
 				360C8B8F2A3F2028007112C5 /* plant2110.mlmodel in Sources */,
 				3638D09129EEDE8B0010AC26 /* ViewController.swift in Sources */,
