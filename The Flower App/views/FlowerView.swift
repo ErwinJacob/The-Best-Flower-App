@@ -37,17 +37,12 @@ struct FlowerView: View {
                         HStack{
                             ForEach(flower.data){ flowerData in
                                 Button {
-                                    flower.image = flowerData.image
+                                    flower.changeImage(flowerData.image)
                                     Task{
                                         await flower.modifyFlower()
                                     }
                                     showChangeImageView = false
                                 } label: {
-//                                    Image(uiImage: flowerData.image)
-//                                        .resizable()
-//                                        .scaledToFit()
-////                                        .frame(width: proxy.size.height*0.25)
-//                                        .clipShape(Circle())
                                     Image(uiImage: flowerData.image)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)

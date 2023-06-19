@@ -64,6 +64,11 @@ class Flower: Identifiable, ObservableObject, Hashable{
     }
     
     @MainActor
+    func changeImage(_ img: UIImage){
+        self.image = img
+    }
+    
+    @MainActor
     func modifyFlower() async -> Bool{
         do{
             let db = Firestore.firestore()

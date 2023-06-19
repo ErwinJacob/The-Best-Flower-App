@@ -75,7 +75,7 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.session.stopRunning()
 //                return UIImage(data: self.picData)
-                completion(UIImage(data: self.picData)!)
+                completion(UIImage(data: self.picData) ?? UIImage(systemName: "pencil")!)
             })
             
             DispatchQueue.main.async {

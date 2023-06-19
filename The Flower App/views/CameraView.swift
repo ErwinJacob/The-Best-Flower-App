@@ -9,12 +9,14 @@ struct CameraView: View {
     @ObservedObject var flower: Flower
     
     @State private var isLoading: Bool = false
-
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     @State private var detections: [VNRecognizedObjectObservation] = []
     @State private var image: UIImage?
-
+    @State private var isMarkerGood: Bool = false
+    @State private var isPotGood: Bool = false
+    @State private var isFlowerGood: Bool = false
+    @State private var plantHeight: Int = 0
     var body: some View {
         GeometryReader { proxy in
             ZStack {
@@ -23,12 +25,40 @@ struct CameraView: View {
                     .overlay {
                         if camera.isTaken{
                             detectionOverlay(proxy: proxy)
+                                .onAppear{
+                                    objectDetection()
+                                    self.plantHeight = Int(calcPlantSize())
+                                }
                         }
                     }
 
                 if camera.isTaken {
                     VStack {
                         Spacer()
+                        
+                        if isFlowerGood&&isMarkerGood{
+                            Text("Your plant height is: \(plantHeight) cm")
+                                .padding(.bottom, proxy.size.height*0.05)
+                        }
+
+                        HStack{
+                            Text(isMarkerGood ? "Marker detected" : "Marker not detected")
+                                .foregroundColor(isMarkerGood ? Color.green : Color.red)
+                                .font(.caption)
+                                .bold()
+                            Text(isPotGood ? "Pot detected" : "Pot not detected")
+                                .foregroundColor(isPotGood ? Color.green : Color.red)
+                                .font(.caption)
+                                .bold()
+                            Text(isFlowerGood ? "Plant detected" : "Plant not detected")
+                                .foregroundColor(isFlowerGood ? Color.green : Color.red)
+                                .font(.caption)
+                                .bold()
+                        }
+                        .padding(.bottom, proxy.size.height*0.05)
+                        
+//                        Spacer()
+                        
                         HStack {
 
                             ZStack {
@@ -121,25 +151,28 @@ struct CameraView: View {
 
                         Spacer()
 
-                        Text("Zrób zdjęcie tak, aby znacznik\nznajdował się w polu poniżej")
-                            .font(.title2)
+                        Text("Robiąc zdjęcie pamiętaj, że cała roślina oraz znacznik muszą być widoczne")
+                            .multilineTextAlignment(.center)
+                            .font(.title3)
                             .foregroundColor(.gray)
                             .bold()
 
                         Spacer()
 
-                        ZStack {
-                            // Additional views or overlays
-                        }
-                        .frame(width: proxy.size.width * 0.25, height: proxy.size.width * 0.25)
-                        .overlay {
-                            Rectangle().stroke(.white, lineWidth: 2)
-                        }
-                        .padding(.bottom, 30)
+//                        ZStack {
+//                            // Additional views or overlays
+//                        }
+//                        .frame(width: proxy.size.width * 0.25, height: proxy.size.width * 0.25)
+//                        .overlay {
+//                            Rectangle().stroke(.white, lineWidth: 2)
+//                        }
+//                        .padding(.bottom, 30)
 
                         Button {
                             camera.takePic { img in
                                 updateDetections(for: img)
+//                                objectDetection()
+//                                self.plantHeight = Int(calcPlantSize())
                             }
                         } label: {
                             ZStack {
@@ -175,6 +208,15 @@ struct CameraView: View {
         }
     }
 
+    @MainActor
+    private func objectDetection(){
+        detections.forEach { detection in
+            if detection.labels[0].identifier == "monstera"{self.isFlowerGood = true}
+            if detection.labels[0].identifier == "pot"{self.isPotGood = true}
+            if detection.labels[0].identifier == "marker"{self.isMarkerGood = true}
+        }
+        self.plantHeight = Int(self.calcPlantSize())
+    }
 
     private func updateDetections(for image: UIImage) {
         guard let ciImage = CIImage(image: image) else {

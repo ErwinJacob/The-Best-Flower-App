@@ -42,8 +42,10 @@ struct FlowersView: View {
     @State var showingEditAlert: Bool = false
     @State private var editorFlowerName: String = ""
     @State private var selectedFlower: Flower = Flower()
+    @State private var selectedFlowerId: Int = 0
     @ObservedObject var view: ViewController
     @State private var deleteConfirm: Bool = false
+    
     var body: some View {
         GeometryReader{ proxy in
             NavigationView {
@@ -112,6 +114,8 @@ struct FlowersView: View {
                             .swipeActions(allowsFullSwipe: true) {
                                 Button(role: .none, action: {
                                     deleteConfirm = true
+                                    selectedFlower = flower
+                                    selectedFlowerId = index
                                 } ) {
                                         Label("Delete", systemImage: "trash")
                                 }
@@ -120,29 +124,31 @@ struct FlowersView: View {
                                 Button (action: {
                                     editorFlowerName = flower.name
                                     selectedFlower = flower
+                                    selectedFlowerId = index
                                     showingEditAlert.toggle()
                                 }) {
                                   Label("Modify", systemImage: "pencil")
                                 }
                                 .tint(Color(UIColor.systemBlue))
                             }
-                            .confirmationDialog("Are you sure?",
-                              isPresented: $deleteConfirm) {
-                              Button("Delete this flower", role: .destructive) {
-                                  Task{
-                                      if await user.delFlower(delFlower: flower){
-                                          //TODO: usuniecie z tablicy
-                                          deleteConfirm = false
-                                          user.flowers.remove(at: index)
-                                      }
-                                      else{
-                                          //error
-                                          deleteConfirm = false
-                                      }
-                                  }
-                               }
-                             }
+                            .confirmationDialog("Are you sure?", isPresented: $deleteConfirm) {
+                                Button("Delete flower: \(selectedFlower.name)", role: .destructive) {
+                                    Task{
+                                        if await user.delFlower(delFlower: selectedFlower){
+                                            //TODO: usuniecie z tablicy
+                                            deleteConfirm = false
+                                            user.flowers.remove(at: selectedFlowerId)
+                                        }
+                                        else{
+                                            //error
+                                            deleteConfirm = false
+                                        }
+                                    }
+                                }
+                            }
+                        
                         }
+                    
                     }
                     .refreshable {
                         await user.fetchData()
