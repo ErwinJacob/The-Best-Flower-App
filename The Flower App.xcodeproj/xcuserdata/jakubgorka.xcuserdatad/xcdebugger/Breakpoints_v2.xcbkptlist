@@ -24,34 +24,34 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "DF2B170C-97BD-4CEA-9B36-5E6A816C093B"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "The Flower App/views/CameraView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "objectDetection()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "DF2B170C-97BD-4CEA-9B36-5E6A816C093B - dfaa313432af2e1c"
+                  uuid = "DF2B170C-97BD-4CEA-9B36-5E6A816C093B - 5d6c3c7c7373c65e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "The_Best_Flower_App.CameraView.updateDetections(for: __C.UIImage) -&gt; ()"
+                  symbolName = "The_Best_Flower_App.CameraView.objectDetection() -&gt; ()"
                   moduleName = "The Best Flower App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "218"
-                  endingLineNumber = "218"
-                  offsetFromSymbolStart = "360">
+                  startingLineNumber = "219"
+                  endingLineNumber = "219"
+                  offsetFromSymbolStart = "1108">
                </Location>
                <Location
-                  uuid = "DF2B170C-97BD-4CEA-9B36-5E6A816C093B - 89c02d4a29f2a03a"
+                  uuid = "DF2B170C-97BD-4CEA-9B36-5E6A816C093B - 89c02d4a29f2a095"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -61,8 +61,8 @@
                   urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "216"
-                  endingLineNumber = "216"
+                  startingLineNumber = "219"
+                  endingLineNumber = "219"
                   offsetFromSymbolStart = "1040">
                </Location>
             </Locations>
@@ -72,103 +72,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "A60E4D86-6EEB-492C-8802-71755969309F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "The Flower App/views/CameraView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "objectDetection()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A60E4D86-6EEB-492C-8802-71755969309F - 5d6c3c7c7373c6d2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "The_Best_Flower_App.CameraView.objectDetection() -&gt; ()"
-                  moduleName = "The Best Flower App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "215"
-                  endingLineNumber = "215"
-                  offsetFromSymbolStart = "1200">
-               </Location>
-               <Location
-                  uuid = "A60E4D86-6EEB-492C-8802-71755969309F - 89c02d4a29f2a019"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.VNRecognizedObjectObservation) -&gt; () in The_Best_Flower_App.CameraView.objectDetection() -&gt; ()"
-                  moduleName = "The Best Flower App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "215"
-                  endingLineNumber = "215"
-                  offsetFromSymbolStart = "564">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7BF21FF3-996B-4C58-9CA8-4B907BE6B8BA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "The Flower App/views/CameraView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
-            landmarkName = "objectDetection()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "7BF21FF3-996B-4C58-9CA8-4B907BE6B8BA - 5d6c3c7c7373c6b3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "The_Best_Flower_App.CameraView.objectDetection() -&gt; ()"
-                  moduleName = "The Best Flower App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "214"
-                  endingLineNumber = "214"
-                  offsetFromSymbolStart = "608">
-               </Location>
-               <Location
-                  uuid = "7BF21FF3-996B-4C58-9CA8-4B907BE6B8BA - 89c02d4a29f2a078"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.VNRecognizedObjectObservation) -&gt; () in The_Best_Flower_App.CameraView.objectDetection() -&gt; ()"
-                  moduleName = "The Best Flower App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "214"
-                  endingLineNumber = "214"
-                  offsetFromSymbolStart = "140">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D4987002-3F12-41F2-9E98-62E1529636B6"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "The Flower App/views/CameraView.swift"
@@ -180,22 +84,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D4987002-3F12-41F2-9E98-62E1529636B6 - dfaa313432af2e1c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "The_Best_Flower_App.CameraView.updateDetections(for: __C.UIImage) -&gt; ()"
-                  moduleName = "The Best Flower App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "218"
-                  endingLineNumber = "218"
-                  offsetFromSymbolStart = "360">
-               </Location>
-               <Location
-                  uuid = "D4987002-3F12-41F2-9E98-62E1529636B6 - 5d6c3c7c7373c63f"
+                  uuid = "A60E4D86-6EEB-492C-8802-71755969309F - 5d6c3c7c7373c63f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -207,6 +96,117 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "218"
                   endingLineNumber = "218"
+                  offsetFromSymbolStart = "528">
+               </Location>
+               <Location
+                  uuid = "A60E4D86-6EEB-492C-8802-71755969309F - 89c02d4a29f2a0f4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.VNRecognizedObjectObservation) -&gt; () in The_Best_Flower_App.CameraView.objectDetection() -&gt; ()"
+                  moduleName = "The Best Flower App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "218"
+                  endingLineNumber = "218"
+                  offsetFromSymbolStart = "564">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7BF21FF3-996B-4C58-9CA8-4B907BE6B8BA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Flower App/views/CameraView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "objectDetection()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7BF21FF3-996B-4C58-9CA8-4B907BE6B8BA - 89c02d4a29f2a0db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.VNRecognizedObjectObservation) -&gt; () in The_Best_Flower_App.CameraView.objectDetection() -&gt; ()"
+                  moduleName = "The Best Flower App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "217"
+                  endingLineNumber = "217"
+                  offsetFromSymbolStart = "1484">
+               </Location>
+               <Location
+                  uuid = "7BF21FF3-996B-4C58-9CA8-4B907BE6B8BA - 89c02d4a29f2a0db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.VNRecognizedObjectObservation) -&gt; () in The_Best_Flower_App.CameraView.objectDetection() -&gt; ()"
+                  moduleName = "The Best Flower App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "217"
+                  endingLineNumber = "217"
+                  offsetFromSymbolStart = "140">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4987002-3F12-41F2-9E98-62E1529636B6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Flower App/views/CameraView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "objectDetection()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D4987002-3F12-41F2-9E98-62E1529636B6 - dfaa313432af2d98"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "The_Best_Flower_App.CameraView.updateDetections(for: __C.UIImage) -&gt; ()"
+                  moduleName = "The Best Flower App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "222"
+                  endingLineNumber = "222"
+                  offsetFromSymbolStart = "280">
+               </Location>
+               <Location
+                  uuid = "D4987002-3F12-41F2-9E98-62E1529636B6 - 5d6c3c7c7373c59c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "The_Best_Flower_App.CameraView.objectDetection() -&gt; ()"
+                  moduleName = "The Best Flower App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
                   offsetFromSymbolStart = "608">
                </Location>
             </Locations>
@@ -256,6 +256,69 @@
                   startingLineNumber = "84"
                   endingLineNumber = "84"
                   offsetFromSymbolStart = "1828">
+               </Location>
+               <Location
+                  uuid = "6F51D210-872B-423E-82EB-66C1211B6571 - 526045adaab8507a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.overlay&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.overlay&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;)&gt;&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.overlay&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI._ConditionalContent&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.overlay&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;)&gt;&gt;)&gt;&gt;, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.Spacer&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.bold(Swift.Bool) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Button&lt;SwiftUI.ZStack&lt;&lt;&lt;opaque return type of SwiftUI.View.overlay&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt;)&gt;&gt;&gt;)&gt; in closure #1 (SwiftUI.GeometryProxy) -&gt; SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.overlay&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI._ConditionalContent&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.overlay&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;)&gt;&gt;)&gt;&gt;, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.Spacer&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.bold(Swift.Bool) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Button&lt;SwiftUI.ZStack&lt;&lt;&lt;opaque return type of SwiftUI.View.overlay&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt;)&gt;&gt;&gt;)&gt;&gt; in The_Best_Flower_App.CameraView.body.getter : some"
+                  moduleName = "The Best Flower App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "1664">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "79050090-4840-401E-AAA7-E1C2462D3442"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Flower App/views/CameraView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
+            landmarkName = "objectDetection()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "79050090-4840-401E-AAA7-E1C2462D3442 - dfaa313432af2d98"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "The_Best_Flower_App.CameraView.updateDetections(for: __C.UIImage) -&gt; ()"
+                  moduleName = "The Best Flower App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "222"
+                  endingLineNumber = "222"
+                  offsetFromSymbolStart = "280">
+               </Location>
+               <Location
+                  uuid = "79050090-4840-401E-AAA7-E1C2462D3442 - 89c02d4a29f2a0b6"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.VNRecognizedObjectObservation) -&gt; () in The_Best_Flower_App.CameraView.objectDetection() -&gt; ()"
+                  moduleName = "The Best Flower App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jakubgorka/Desktop/The-Flower-App/The%20Flower%20App/views/CameraView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "220"
+                  endingLineNumber = "220"
+                  offsetFromSymbolStart = "1512">
                </Location>
             </Locations>
          </BreakpointContent>

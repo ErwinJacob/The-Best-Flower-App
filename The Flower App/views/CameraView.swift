@@ -128,7 +128,10 @@ struct CameraView: View {
                             // Retake button
                             Button {
                                 camera.reTake()
-
+                                isPotGood = false
+                                isFlowerGood = false
+                                isMarkerGood = false
+                                plantHeight = 0
                             } label: {
                                 ZStack {
                                     Circle()

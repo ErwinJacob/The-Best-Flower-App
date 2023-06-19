@@ -24,13 +24,15 @@ struct FlowerTile: View {
             VStack(alignment: .leading) {
                 Text(name)
                     .font(.headline)
-                Text(species)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                Text(description)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .lineLimit(2)
+                if species != "Not known"{
+                    Text(species)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+//                Text(description)
+//                    .font(.subheadline)
+//                    .foregroundColor(.gray)
+//                    .lineLimit(2)
             }
         }
     }
@@ -86,7 +88,7 @@ struct FlowersView: View {
                             let newEntryDate = dtFormatter.string(from: now) //get current date
 
                             
-                            let newFlower: Flower = Flower(imageBlob: convertImageToBase64String(img: UIImage(named: "test")!), info: "no info", flowerId: newFlowerId, userId: user.data!.uid, name: "no name", species: "no species", dominantColor: "#000000", date: newEntryDate)
+                            let newFlower: Flower = Flower(imageBlob: convertImageToBase64String(img: UIImage(named: "test")!), info: "0", flowerId: newFlowerId, userId: user.data!.uid, name: "My new flower", species: "Not known", dominantColor: "#000000", date: newEntryDate)
                             Task{
                                 if (await user.addFlower(newFlower: newFlower)) {
                                     user.flowers.append(newFlower) // append the new flower to the user.flowers array
@@ -109,7 +111,7 @@ struct FlowersView: View {
                             NavigationLink {
                                 FlowerView(flower: flower)
                             } label: {
-                                FlowerTile(name: flower.name, species: "species", description: "description", photo: flower.image)
+                                FlowerTile(name: flower.name, species: flower.species, description: "description", photo: flower.image)
                             }
                             .swipeActions(allowsFullSwipe: true) {
                                 Button(role: .none, action: {
